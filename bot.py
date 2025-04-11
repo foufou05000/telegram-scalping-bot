@@ -1,7 +1,8 @@
 import os
 import time
 import logging
-from telegram.ext import Application, CommandHandler, MessageHandler, Filters, ConversationHandler, JobQueue
+from telegram.ext import Application, CommandHandler, MessageHandler, ConversationHandler, JobQueue
+from telegram.ext.filters import Filters  # Updated import for Filters
 import ccxt
 
 # Set up logging
@@ -26,7 +27,7 @@ def cancel(update, context):
 
 def check_market(context):
     try:
-        # Initialize the Kraken exchange (switched from Binance to avoid region restrictions)
+        # Initialize the Kraken exchange
         exchange = ccxt.kraken()
         # Fetch market data
         markets = exchange.fetch_markets()
@@ -49,7 +50,7 @@ def main() -> None:
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
-            AMOUNT: [MessageHandler(Filters.TEXT & ~Filters.COMMAND, get_amount)],
+            AMOUNT: [MessageHandler(Filters.text & ~Filters.command, get_amount)],  # Updated Filters usage
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )
