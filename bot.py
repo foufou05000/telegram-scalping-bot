@@ -279,7 +279,7 @@ def main() -> None:
     # Use webhook for Heroku
     port = int(os.environ.get("PORT", 8443))
     token = "7107491554:AAGizcW0xlmMWdxbsWgg5Boq30Tvjws56XY"  # Must match the token above
-    app_name = "fathomless-sands-40507"  # Replace with your Heroku app name
+    app_name = "bottelegram05"  # Replace with your Heroku app name
     while True:
         try:
             application.run_webhook(
